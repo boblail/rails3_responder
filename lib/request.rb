@@ -1,4 +1,4 @@
-require 'rails3_backport/mime'
+require 'mime'
 
 
 class ActionController::Request
