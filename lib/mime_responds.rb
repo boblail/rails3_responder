@@ -8,6 +8,8 @@ class ActionController::Base
   
   
   ### Path to make render, redirect_to, and head public
+  # this block (why?) caused exceptions for one app
+=begin
   alias_method :old_render, :render
   alias_method :old_redirect_to, :redirect_to
   alias_method :old_head, :head
@@ -23,6 +25,7 @@ class ActionController::Base
   def head(*args)
     old_head(*args)
   end
+=end
   
  
 
