@@ -82,13 +82,13 @@ class ActionController::Base
   # might look something like this:
   #
   #   def index
-  #     @people = Person.find(:all)
+  #     @people = @account.people.find(:all)
   #   end
   #
   # Here's the same action, with web-service support baked in:
   #
   #   def index
-  #     @people = Person.find(:all)
+  #     @people = @account.people.find(:all)
   #
   #     respond_to do |format|
   #       format.html
@@ -174,7 +174,7 @@ class ActionController::Base
   # Respond to also allows you to specify a common block for different formats by using any:
   #
   #   def index
-  #     @people = Person.find(:all)
+  #     @people = @account.people.find(:all)
   #
   #     respond_to do |format|
   #       format.html
@@ -197,7 +197,7 @@ class ActionController::Base
   #     respond_to :html, :xml, :json
   #
   #     def index
-  #       @people = Person.find(:all)
+  #       @people = @account.people.find(:all)
   #       respond_with(@person)
   #     end
   #   end

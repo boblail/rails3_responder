@@ -7,7 +7,7 @@ module ActionController #:nodoc:
   #     respond_to :html, :xml, :json
   #
   #     def index
-  #       @people = Person.find(:all)
+  #       @people = @account.people.find(:all)
   #       respond_with(@people)
   #     end
   #   end
@@ -97,8 +97,12 @@ module ActionController #:nodoc:
     end
  
     # in this version of rails, these are all protected
-    delegate :head, :render, :redirect_to,   :to => :controller
-    delegate :get?, :post?, :put?, :delete?, :to => :request    
+    # delegate :head, :render, :redirect_to,   :to => :controller
+    def render(*args, &block); @controller.send :render, *args, &block; end
+    def redirect_to(*args); @controller.send :redirect_to, *args; end
+    def head(*args); @controller.send :head, *args; end
+    
+    delegate :get?, :post?, :put?, :delete?, :to => :request
  
     # Undefine :to_json and :to_yaml since it's defined on Object
     undef_method(:to_json) if method_defined?(:to_json)
@@ -202,7 +206,7 @@ module ActionController #:nodoc:
     #   render :xml => @user, :status => :created
     #
     def display(resource, given_options={})
-      controller.render given_options.merge!(options).merge!(format => resource)
+      render given_options.merge!(options).merge!(format => resource)
     end
  
     # Check if the resource has errors or not.
